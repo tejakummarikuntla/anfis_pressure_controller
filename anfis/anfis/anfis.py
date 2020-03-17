@@ -10,7 +10,8 @@ from anfis.membership import mfDerivs
 import copy
 
 class ANFIS:
-    """Class to implement an Adaptive Network Fuzzy Inference System: ANFIS"
+    """
+    Class to implement an Adaptive Network Fuzzy Inference System: ANFIS"
 
     Attributes:
         X
@@ -24,8 +25,6 @@ class ANFIS:
         errors
         memFuncsHomo
         trainingType
-
-
     """
 
     def __init__(self, X, Y, memFunction):
@@ -63,7 +62,7 @@ class ANFIS:
         while (epoch < epochs) and (convergence is not True):
 
             #layer four: forward pass
-            [layerFour, wSum, w] = forwardHalfPass(self, self.X)
+            [layerFour, wSum, w] = forwardHalfPass(self, self.  X)
 
             #layer five: least squares estimate
             layerFive = np.array(self.LSE(layerFour,self.Y,initialGamma))
@@ -126,7 +125,13 @@ class ANFIS:
 
 
         self.fittedValues = predict(self,self.X)
+
+        print("log_Pridicting for X value: ", self.X)
+        print("log_Fitted_Values with predict func: ", self.fittedValues)
         self.residuals = self.Y - self.fittedValues[:,0]
+
+        print("log_residuals: ", self.residuals)
+        print("log_Actual Y val {y} and fittedvalue {res}".format(y=self.Y, res=self.fittedValues[:,0]))
 
         return self.fittedValues
 
