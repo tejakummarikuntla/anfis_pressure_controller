@@ -26,7 +26,7 @@ mf = [
 
 mfc = membership.membershipfunction.MemFuncs(mf)
 anf = ANFIS(X, Y, mfc)
-anf.trainHybridJangOffLine(epochs=10)
+anf.trainHybridJangOffLine(epochs=100)
 print(round(anf.consequents[-1][0],6))
 print(round(anf.consequents[-2][0],6))
 print(round(anf.fittedValues[9][0],6))
@@ -34,3 +34,4 @@ if round(anf.consequents[-1][0],6) == -5.275538 and round(anf.consequents[-2][0]
 	print('test is good')
 anf.plotErrors()
 anf.plotResults()
+anf.model_report()

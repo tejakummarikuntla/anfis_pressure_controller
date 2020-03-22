@@ -8,6 +8,9 @@ import itertools
 import numpy as np
 from anfis.membership import mfDerivs
 import copy
+import pandas as pd
+from sklearn.metrics import mean_squared_error
+import math
 
 class ANFIS:
     """
@@ -126,12 +129,12 @@ class ANFIS:
 
         self.fittedValues = predict(self,self.X)
 
-        print("log_Pridicting for X value: ", self.X)
-        print("log_Fitted_Values with predict func: ", self.fittedValues)
+        # print("log_Pridicting for X value: ", self.X)
+        # print("log_Fitted_Values with predict func: ", self.fittedValues)
         self.residuals = self.Y - self.fittedValues[:,0]
 
-        print("log_residuals: ", self.residuals)
-        print("log_Actual Y val {y} and fittedvalue {res}".format(y=self.Y, res=self.fittedValues[:,0]))
+        # print("log_residuals: ", self.residuals)
+        # print("log_Actual Y val {y} and fittedvalue {res}".format(y=self.Y, res=self.fittedValues[:,0]))
 
         return self.fittedValues
 
@@ -171,8 +174,19 @@ class ANFIS:
             plt.plot(range(len(self.Y)),self.Y,'b', label='original')
             plt.legend(loc='upper left')
             plt.show()
-
-
+    
+    def model_report(self):
+        if self.trainingType == 'Not trained yet':
+            print(self.trainingType)
+        else:
+            report_df = pd.DataFrame()
+            report_df['Actual_Y_values'] = self.Y
+            report_df['Predicted_Y_values'] = self.fittedValues
+            report_df['Difference'] = report_df['Actual_Y_values'] - report_df['Predicted_Y_values']
+            mse = mean_squared_error(report_df['Actual_Y_values'], report_df['Predicted_Y_values'])
+            print("Log_ Report Data Frame: ", report_df)
+            print("Mean Square Error: ", mse)
+            print("Root Mean Squared Error: ", math.sqrt(mse))
 
 def forwardHalfPass(ANFISObj, Xs):
     layerFour = np.empty(0,)
