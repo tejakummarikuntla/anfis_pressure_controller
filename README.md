@@ -12,5 +12,5 @@ ref: https://github.com/twmeggs/anfis
 
 ```
 cd anfis
-python test.py
+python tests.py
 ```
