@@ -9,3 +9,8 @@ ref: https://github.com/twmeggs/anfis
 <br></br>
 
 ![anfis_trained_vs_originated](short_logs/anfis_trained_vs_originated.PNG)
+
+```
+cd anfis
+python test.py
+```
